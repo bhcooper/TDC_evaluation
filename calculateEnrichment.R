@@ -8,10 +8,10 @@ library(stringr)
 
 selex.config(workingDir=workDir, maxThreadNumber=16)
 
-R0.file = "R0.fastq.gz"
-data.file = commandArgs(TRUE)[1]
-round = strtoi(commandArgs(TRUE)[2])
-kLen = strtoi(commandArgs(TRUE)[3])
+R0.file = commandArgs(TRUE)[1]
+data.file = commandArgs(TRUE)[2]
+round = strtoi(commandArgs(TRUE)[3])
+kLen = strtoi(commandArgs(TRUE)[4])
 
 varLen = nchar(readLines(gzfile(data.file), 2)[2])
 

@@ -2,7 +2,7 @@
 Here we describe a detailed workflow for reproducing the tests used to evaluate the TopDownCrawl (TDC) method available at topdowncrawl.usc.edu. The method is used for the alignment of sequences with quantitative binding metrics from DNA binding experiments such as SELEX-seq.
 
 ## Datasets Used for Evaluation
-We evaluated TDC using 10 previously published SELEX-seq datasets released with the following publications. 
+We evaluated TDC using 10 previously published SELEX-seq datasets released with the following publications. All reads were trimmed to only include the variable region.
 
 *Abe, N., Dror, I., Yang, L., Slattery, M., Zhou, T., Bussemaker, H. J., Rohs, R., & Mann, R. S. (2015). Deconvolving the recognition of DNA shape from sequence. Cell, 161(2), 307-318.*
 
@@ -35,3 +35,14 @@ We evaluated TDC using 10 previously published SELEX-seq datasets released with 
 | SRR1765757 | UbxIVa-Exd_R0.fastq.gz |
 | SRR1765753 | UbxIVa-Exd_R3.fastq.gz |
 </details>
+
+### Calculation of Relative Enrichment
+The relative enrichments for 10-mers were calculated using a modified R script provided for the SELEX package available on bioconductor. 
+
+https://bioconductor.org/packages/release/bioc/html/SELEX.html
+
+```
+./calculateEnrichment.R <R0 input> <RN input> <round #> <k length>
+./calculateEnrichment.R AR_R0.fastq.gz AR_R4.fastq.gz 4 10
+```
+ 
