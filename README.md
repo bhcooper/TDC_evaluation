@@ -4,13 +4,15 @@ Here we describe a detailed workflow for reproducing the tests used to evaluate 
 ## Datasets Used for Evaluation
 We evaluated TDC using 10 previously published SELEX-seq datasets released with the following publications. 
 
-*Abe, N., Dror, I., Yang, L., Slattery, M., Zhou, T., Bussemaker, H. J., Rohs, R., & Mann, R. S. (2015). Deconvolving the recognition of DNA shape from sequence. Cell, 161(2), 307-318. *
+*Abe, N., Dror, I., Yang, L., Slattery, M., Zhou, T., Bussemaker, H. J., Rohs, R., & Mann, R. S. (2015). Deconvolving the recognition of DNA shape from sequence. Cell, 161(2), 307-318.*
 
-*Dantas Machado, A. C., Cooper, B. H., Lei, X., Di Felice, R., Chen, L., & Rohs, R. (2020). Landscape of DNA binding signatures of myocyte enhancer factor-2B reveals a unique interplay of base and shape readout. Nucleic acids research, 48(15), 8529-8544. *
+*Dantas Machado, A. C., Cooper, B. H., Lei, X., Di Felice, R., Chen, L., & Rohs, R. (2020). Landscape of DNA binding signatures of myocyte enhancer factor-2B reveals a unique interplay of base and shape readout. Nucleic acids research, 48(15), 8529-8544.*
 
 *Zhang, L., Martini, G. D., Rube, H. T., Kribelbauer, J. F., Rastogi, C., FitzPatrick, V. D., Houtman, J. C., Bussemaker, H. J., & Pufall, M. A. (2018). SelexGLM differentiates androgen and glucocorticoid receptor DNA-binding preference over an extended binding site. Genome research, 28(1), 111-121.*
 
-
+<details>
+<summary style="font-size:14px">View code</summary>
+<p>
 | SRA | Renamed File |
 | --- | --- |
 | SRR5340724 | AR_R0.fastq.gz |
@@ -33,3 +35,4 @@ We evaluated TDC using 10 previously published SELEX-seq datasets released with 
 | SRR1765750 | UbxIa-Exd_R3.fastq.gz |
 | SRR1765757 | UbxIVa-Exd_R0.fastq.gz |
 | SRR1765753 | UbxIVa-Exd_R3.fastq.gz |
+</p></details>
