@@ -11,6 +11,7 @@ We evaluated TDC using 10 previously published SELEX-seq datasets released with 
 *Zhang, L., Martini, G. D., Rube, H. T., Kribelbauer, J. F., Rastogi, C., FitzPatrick, V. D., Houtman, J. C., Bussemaker, H. J., & Pufall, M. A. (2018). SelexGLM differentiates androgen and glucocorticoid receptor DNA-binding preference over an extended binding site. Genome research, 28(1), 111-121.*
 
 <details><summary style="font-size:14px">SRA Details</summary>
+
 | SRA | Renamed File |
 | --- | --- |
 | SRR5340724 | AR_R0.fastq.gz |
