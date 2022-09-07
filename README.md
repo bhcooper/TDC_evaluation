@@ -129,8 +129,8 @@ https://anaconda.org/bioconda/meme
 ```
 ./Zfilt.py AbdA-Exd_R3_k10.tsv
 ./tsvToFa.py AbdA-Exd_R3_k10_Z2.tsv
-meme -revcomp -csites <# greater than the input length> -dna <filtered input fa>
-meme -revcomp -csites 10000 -dna AbdA-Exd_R3_k10_Z2.fa 
+meme -revcomp -csites <# greater than the input length> -searchsize <# chars greater than input length> -dna <filtered input fa>
+meme -revcomp -csites 10000 -searchsize 1000000 -dna AbdA-Exd_R3_k10_Z2.fa 
 meme-get-motif -all meme_out/meme.txt > meme_out/motif.txt
 # Output: ./meme_out/motif.txt
 
