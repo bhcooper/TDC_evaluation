@@ -89,7 +89,7 @@ SelexGLM is available as an R package through a github page maintained by the or
 
 https://github.com/BussemakerLab/SelexGLM/
 
-<details><summary style="font-size:14px">SELEX Run Details (For SelexGLM parameterization)</summary>
+<details><summary style="font-size:14px">SELEX Run Details (Used for SelexGLM configuration)</summary>
 
 ```
 # Hox-Exd
