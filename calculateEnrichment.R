@@ -41,4 +41,4 @@ aff = selex.affinities(sample=dataSample, k=kLen, markovModel=mm, numSort=FALSE)
 aff = aff[,c(1,5,2,3,4,6)]
 aff = aff[order(-aff$Affinity),]
 
-write.table(aff, paste0(substr(data.file, 1, str_locate(data.file, "\\.")[1]-1), "_k", kLen, ".tsv"), row.names=FALSE, sep='\t')
+write.table(aff, paste0(substr(data.file, 1, str_locate(data.file, "\\.")[1]-1), "_k", kLen, ".tsv"), row.names=FALSE, sep='\t', quote=FALSE)

@@ -13,12 +13,13 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.utils import shuffle
 
 N = ["A", "C", "G", "T"]
+Nset = set(N)
 
 offset = {"A":0, "C":1, "G":2, "T":3}
 def encode1mer(seq):
     X = np.zeros(len(seq)*4, dtype=bool)
     for i,c in enumerate(seq):
-        if(not c == "N"): 
+        if(c in Nset): 
             X[i * 4 + offset[c]] = True
     return X
 
@@ -58,5 +59,5 @@ X = StandardScaler().fit_transform(X)
 
 model = ElasticNetCV(max_iter = 1e6, cv=5, n_jobs=-1)
 model = cross_validate(model, X, y, cv=5, scoring="r2", return_train_score=True)
-print('Train R²: %.4f' % np.median(model["train_score"]))
+# print('Train R²: %.4f' % np.median(model["train_score"]))
 print('Test  R²: %.4f' % np.median(model["test_score"]))

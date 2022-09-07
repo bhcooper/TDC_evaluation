@@ -30,27 +30,33 @@ table = table.loc[list(unique)]
 seqs = np.array([seq.replace("N", "") for seq in table.index])
 seqlen = len(seqs[0])
 
-matrix = pd.read_csv(sys.argv[2], delim_whitespace=True, comment="#").transpose()
+matrix = None
+with open(sys.argv[2], 'r') as f:
+    matrix = f.read()
+
+matrix = matrix.split("letter-probability matrix")[1]
+matrix = matrix.split('\n')[1:-1]
+matrix = pd.DataFrame([line.split() for line in matrix], columns=['A', 'C', 'G', 'T'], dtype=float).transpose()
 print(f"PFM Shape: {matrix.shape}")
 matrix = np.concatenate((np.full((4, seqlen-1), 0.25), matrix, np.full((4, seqlen-1), 0.25)), axis=1)
 
 nshifts = matrix.shape[1] - seqlen + 1
 
 background = 0.25**seqlen
-BEEML = np.zeros((len(seqs), 2, nshifts))
+scores = np.zeros((len(seqs), 2, nshifts))
 
 for j in range(nshifts):
-    BEEML[:,0,j] = [np.product([matrix[Nlookup[c], i+j] for i,c in enumerate(seq)]) for seq in seqs]
-    BEEML[:,1,j] = [np.product([matrix[3-Nlookup[c], i+j] for i,c in enumerate(seq[::-1])]) for seq in seqs]
+    scores[:,0,j] = [np.product([matrix[Nlookup[c], i+j] for i,c in enumerate(seq)]) for seq in seqs]
+    scores[:,1,j] = [np.product([matrix[3-Nlookup[c], i+j] for i,c in enumerate(seq[::-1])]) for seq in seqs]
 
-score = np.max(np.concatenate((np.max(BEEML, axis=2), np.full((len(seqs), 1), background)), axis=1), axis=1)
-strand = np.argmax(np.concatenate((np.max(BEEML, axis=2), np.full((len(seqs), 1), background)), axis=1), axis=1)
+score = np.max(np.concatenate((np.max(scores, axis=2), np.full((len(seqs), 1), background)), axis=1), axis=1)
+strand = np.argmax(np.concatenate((np.max(scores, axis=2), np.full((len(seqs), 1), background)), axis=1), axis=1)
 argF = strand == 0
 argR = strand == 1
 argN = strand == 2
 shift = np.zeros_like(strand)
-shift[argF] = np.argmax(BEEML[argF,0,:], axis=1) - seqlen + 1
-shift[argR] = np.argmax(BEEML[argR,1,:], axis=1) - seqlen + 1
+shift[argF] = np.argmax(scores[argF,0,:], axis=1) - seqlen + 1
+shift[argR] = np.argmax(scores[argR,1,:], axis=1) - seqlen + 1
 
 seqs[argR] = rc(seqs[argR])
 table.index = seqs
@@ -58,7 +64,7 @@ table = table.reset_index()
 table.rename(columns={table.columns[0]:"Seq"}, inplace=True)
 
 table["Shift"] = shift
-table["PFM"] = score
+table["score"] = score
 table['background?'] = argN
 
 minShift = -np.min(table["Shift"])
@@ -67,6 +73,5 @@ for i, item in table.iterrows():
     shift = item["Shift"]
     table.at[i, table.columns[0]] = "N" * (minShift+shift) + item[table.columns[0]] + "N" * (maxShift-shift)
 
-# out = table[[table.columns[0], 'PFM', table.columns[1], "Shift"]].drop_duplicates().sort_values(table.columns[1], ascending=False).reset_index(drop=True)
-out = table[[table.columns[0], table.columns[1], 'PFM', "Shift"]].drop_duplicates().sort_values(table.columns[1], ascending=False).reset_index(drop=True)
+out = table[[table.columns[0], table.columns[1], 'score', "Shift"]].drop_duplicates().sort_values(table.columns[1], ascending=False).reset_index(drop=True)
 out.to_csv(sys.argv[1][:-4] + "_MEME.tsv", sep="\t", index=False)
