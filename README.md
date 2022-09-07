@@ -89,17 +89,6 @@ SelexGLM is available as an R package through a github page maintained by the or
 
 https://github.com/BussemakerLab/SelexGLM/
 
-```
-./runSelexGLM.R <R0 fastq.gz> <R# fastq.gz> <R#> <most enriched 10-mer as seed> <variable region length> <left adapter> <right adapter>
-./runSelexGLM.R AbdA-Exd_R0.fastq.gz AbdA-Exd_R3.fastq.gz 3 ATGATTTATG 16 CCGACGATCTGG CCAGCTGTCGTAT
-# Output: SelexGLM_k10_R3.pwm
-
-./alignWithSelexGLM.py <input sequences> <SelexGLM generated PWM>
-./alignWithSelexGLM.py AbdA-Exd_R3_k10.tsv SelexGLM_k10_R3.pwm
-# Output: ./AbdA-Exd_R3_k10_SelexGLM.tsv
-
-```
-
 <details><summary style="font-size:14px">SELEX Run Details</summary>
 
 ```
@@ -119,6 +108,17 @@ leftFixed = "GAGTTCTACAGTCCGACGATCCGC"
 rightFixed = "CCTGGAATTCTCGGGTGCCA"
 ```
 </details>
+
+```
+./runSelexGLM.R <R0 fastq.gz> <R# fastq.gz> <R#> <most enriched 10-mer as seed> <variable region length> <left adapter> <right adapter>
+./runSelexGLM.R AbdA-Exd_R0.fastq.gz AbdA-Exd_R3.fastq.gz 3 ATGATTTATG 16 CCGACGATCTGG CCAGCTGTCGTAT
+# Output: SelexGLM_k10_R3.pwm
+
+./alignWithSelexGLM.py <input sequences> <SelexGLM generated PWM>
+./alignWithSelexGLM.py AbdA-Exd_R3_k10.tsv SelexGLM_k10_R3.pwm
+# Output: ./AbdA-Exd_R3_k10_SelexGLM.tsv
+
+```
 
 ### MEME
 MEME is a very popular and powerful tool for the alignment of DNA sequences, but inherently weights all sequences equally. This restricts the ability to use quantitative binding measurements in the alignment process. For this reason, we must restrict the table of 10-mers to only 10-mers which might create a useful binding motif. In this case, we arbitratily chose 10-mers with a log enrichment 2 standard deviations above the mean. This set of 10-mers is used to generate a single motif, which is then used for alignment of all 10-mers. MEME can be accessed through a publicly available webserver or downloaded as part of the meme-suite package available on conda. 
