@@ -121,7 +121,7 @@ rightFixed = "CCTGGAATTCTCGGGTGCCA"
 ```
 
 ### MEME
-MEME is a very popular and powerful tool for the alignment of DNA sequences, but inherently weights all sequences equally. This restricts the ability to use quantitative binding measurements in the alignment process. For this reason, we must restrict the table of 10-mers to only 10-mers which might create a useful binding motif. In this case, we arbitratily chose 10-mers with a log enrichment 2 standard deviations above the mean. This set of 10-mers is used to generate a single motif, which is then used for alignment of all 10-mers. MEME can be accessed through a publicly available webserver or downloaded as part of the meme-suite package available on conda. 
+MEME is a very popular and powerful tool for the alignment of DNA sequences, but inherently weights all sequences equally. This restricts the ability to use quantitative binding measurements in the alignment process. For this reason, we must restrict the table of 10-mers to only 10-mers which might create a useful binding motif. In this case, we arbitratily chose 10-mers with a log enrichment 2 standard deviations above the mean. This set of 10-mers is padded with k-1 ambiguous N bases and used to generate a single motif, which is then used for alignment of all 10-mers. Padding helps generate larger and more representative motifs. MEME can be accessed through a publicly available webserver or downloaded as part of the meme-suite package available on conda. 
 
 https://meme-suite.org/meme/tools/meme
 https://anaconda.org/bioconda/meme
